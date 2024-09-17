@@ -6,7 +6,6 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "helloworld"
@@ -33,8 +32,8 @@ def create_app():
 
     return app
 
-
 def create_database(app):
-    if not path.exists("website/" + DB_NAME):
-        db.create_all(app=app)
+    if not path.exists(DB_NAME):
+        with app.app_context():
+            db.create_all()
         print("Created database!")

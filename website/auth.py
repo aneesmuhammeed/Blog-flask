@@ -11,11 +11,11 @@ auth = Blueprint("auth", __name__)
 def login():
     if request.method == 'POST':
         email = request.form.get("email")
-        password = request.form.get("password")
+        password = request.form.get("password").encode('utf-8')
 
         user = User.query.filter_by(email=email).first()
         if user:
-            if bcrypt.checkpw(user.password, password):
+            if bcrypt.checkpw(user.password, password.encode('utf-8')):
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
@@ -32,8 +32,8 @@ def sign_up():
     if request.method == 'POST':
         email = request.form.get("email")
         username = request.form.get("username")
-        password1 = request.form.get("password1")
-        password2 = request.form.get("password2")
+        password1 = request.form.get("password1").encode('utf-8')
+        password2 = request.form.get("password2").encode('utf-8')
 
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
