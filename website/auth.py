@@ -1,3 +1,5 @@
+# this is used to create blog auth realted purposes (login logout sign-in etc)for better organisation readability
+
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from . import db
 from .models import User

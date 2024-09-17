@@ -6,6 +6,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
+# creating flask application
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "helloworld"
@@ -13,7 +14,9 @@ def create_app():
     db.init_app(app)
 
     from .views import views
+    # views is the variable name 
     from .auth import auth
+    # auth is the variable name 
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
@@ -23,6 +26,7 @@ def create_app():
     create_database(app)
 
     login_manager = LoginManager()
+    # redirect to login page if the user dosent logged in
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
 

@@ -1,16 +1,20 @@
+# this is used to create blog core routes for better organisation readability
+
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Post, User
 from . import db
 
 views = Blueprint("views", __name__)
-
+# views variable name"name of the blueprint" 
 
 @views.route("/")
 @views.route("/home")
 @login_required
 def home():
     posts = Post.query.all()
+    # return "Home"
+    # return render_template("home.html", name="Anees")
     return render_template("home.html", user=current_user, posts=posts)
 
 

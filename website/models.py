@@ -2,7 +2,9 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
+# it is basically a table
 
+# relationship -- one to many relationship one user can have as many as post
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
